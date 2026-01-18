@@ -1,6 +1,8 @@
 {
-  "actionbook": {
-    "command": "npx",
-    "args": ["-y", "@actionbookdev/mcp@latest"]
+  "mcpServers": {
+    "actionbook": {
+      "command": "npx",
+      "args": ["-y", "@actionbookdev/mcp@latest"]
+    }
   }
 }
