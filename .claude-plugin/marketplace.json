@@ -1,93 +1,20 @@
 {
-  "name": "rust-skills",
-  "displayName": "Rust Skills",
-  "version": "1.0.0",
-  "description": "Comprehensive Rust development assistant with meta-question routing, coding guidelines, version queries, and ecosystem support",
-  "categories": ["programming", "rust", "development"],
-  "tags": [
-    "rust",
-    "cargo",
-    "ownership",
-    "borrow-checker",
-    "async",
-    "tokio",
-    "error-handling",
-    "coding-guidelines",
-    "unsafe",
-    "ffi",
-    "concurrency",
-    "memory-safety"
-  ],
-  "repository": "https://github.com/ZhangHanDong/rust-skills",
-  "homepage": "https://github.com/ZhangHanDong/rust-skills",
-  "author": {
+  "name": "rust-skills-marketplace",
+  "description": "Rust development skills marketplace for Claude Code",
+  "owner": {
     "name": "CoRust",
     "email": "corust@example.com"
   },
-  "license": "MIT",
-  "minClaudeCodeVersion": "1.0.0",
-  "skills": [
+  "plugins": [
     {
-      "name": "rust-router",
-      "path": "skills/rust-router/SKILL.md",
-      "description": "Master router for ALL Rust questions"
-    },
-    {
-      "name": "rust-learner",
-      "path": "skills/rust-learner/SKILL.md",
-      "description": "Rust version and crate information queries"
-    },
-    {
-      "name": "coding-guidelines",
-      "path": "skills/coding-guidelines/SKILL.md",
-      "description": "Rust coding conventions and best practices"
-    },
-    {
-      "name": "unsafe-checker",
-      "path": "skills/unsafe-checker/SKILL.md",
-      "description": "Unsafe Rust code review and FFI guidance"
-    },
-    {
-      "name": "m01-ownership",
-      "path": "skills/m01-ownership/SKILL.md",
-      "description": "Memory ownership and lifetimes"
-    },
-    {
-      "name": "m02-resource",
-      "path": "skills/m02-resource/SKILL.md",
-      "description": "Smart pointers and resource management"
-    },
-    {
-      "name": "m03-mutability",
-      "path": "skills/m03-mutability/SKILL.md",
-      "description": "Mutability and interior mutability"
-    },
-    {
-      "name": "m04-zero-cost",
-      "path": "skills/m04-zero-cost/SKILL.md",
-      "description": "Zero-cost abstractions and generics"
-    },
-    {
-      "name": "m05-type-driven",
-      "path": "skills/m05-type-driven/SKILL.md",
-      "description": "Type-driven development patterns"
-    },
-    {
-      "name": "m06-error-handling",
-      "path": "skills/m06-error-handling/SKILL.md",
-      "description": "Error handling with Result and Option"
-    },
-    {
-      "name": "m07-concurrency",
-      "path": "skills/m07-concurrency/SKILL.md",
-      "description": "Concurrency with Send, Sync, async/await"
-    },
-    {
-      "name": "m08-safety",
-      "path": "skills/m08-safety/SKILL.md",
-      "description": "Memory safety guarantees"
+      "name": "rust-skills",
+      "description": "Comprehensive Rust development assistant with meta-question routing, coding guidelines, version queries, and ecosystem support",
+      "version": "1.0.0",
+      "source": "./",
+      "author": {
+        "name": "CoRust",
+        "email": "corust@example.com"
+      }
     }
-  ],
-  "featured": true,
-  "verified": false
+  ]
 }
