@@ -33,7 +33,7 @@ Query Rust skills by meta-question category or technical subcategory.
 - `m05` - Type-Driven Design
 - `m06` - Error Handling Philosophy
 - `m07` - Concurrency Correctness
-- `m08` - Safety Boundaries
+- ~~`m08`~~ - Merged into `unsafe-checker`
 - `m09` - Domain Constraint Mapping
 - `m10` - Performance Optimization Model
 - `m11` - Ecosystem Integration

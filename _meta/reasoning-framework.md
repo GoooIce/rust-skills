@@ -211,3 +211,29 @@ Bad: "Use Arc<Mutex<T>>" (didn't ask about domain constraints)
 3. **Answer with reasoning chain** showing WHY not just WHAT
 4. **Reference appropriate skills** for each layer
 5. **Use 5-Question Reboot** when stuck
+
+---
+
+## Related Documents
+
+| Document | Purpose |
+|----------|---------|
+| [layer-definitions.md](./layer-definitions.md) | Detailed layer definitions and boundaries |
+| [negotiation-protocol.md](./negotiation-protocol.md) | Agent communication protocol |
+| [error-protocol.md](./error-protocol.md) | 3-Strike escalation rules |
+| [externalization.md](./externalization.md) | Cognitive externalization patterns |
+| [hooks-patterns.md](./hooks-patterns.md) | Automatic trigger mechanisms |
+
+### Index Files
+
+| File | Purpose |
+|------|---------|
+| [../index/skills-index.md](../index/skills-index.md) | Complete skill catalog |
+| [../index/triggers-index.md](../index/triggers-index.md) | Keyword-to-skill mapping |
+| [../index/meta-questions.md](../index/meta-questions.md) | Meta-question category definitions |
+
+### Router
+
+| File | Purpose |
+|------|---------|
+| [../skills/rust-router/SKILL.md](../skills/rust-router/SKILL.md) | Master routing logic |

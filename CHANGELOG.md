@@ -5,6 +5,53 @@ All notable changes to rust-skills will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-01-22
+
+### Added
+
+#### Plugin Marketplace Support
+- Added `.claude-plugin/marketplace.json` with official schema
+- Simplified `.claude-plugin/plugin.json` (skills auto-discovered)
+- Support for `/plugin marketplace add ZhangHanDong/rust-skills`
+
+#### Domain Skills (Layer 3)
+- **domain-fintech**: Financial technology patterns
+- **domain-web**: Web development patterns
+- **domain-cli**: CLI application patterns
+- **domain-embedded**: Embedded systems patterns
+- **domain-cloud-native**: Cloud-native patterns
+- **domain-iot**: IoT patterns
+- **domain-ml**: Machine learning patterns
+
+#### Negotiation Protocol
+- Added `_meta/negotiation-protocol.md` for comparative queries
+- Added `_meta/negotiation-templates.md` for response formats
+- Support for "compare", "vs", "best practice" queries
+
+### Changed
+
+#### rust-router Optimization
+- **56% context reduction** (18.7 KB → 8.1 KB)
+- Moved negotiation details to `patterns/negotiation.md`
+- Moved workflow examples to `examples/workflow.md`
+- Moved OS-Checker integration to `integrations/os-checker.md`
+- Removed redundant skill file paths listing
+
+#### Test Coverage
+- Complete trigger test coverage (25/25 user-facing skills)
+- Added Layer 2 skills tests (m05, m09-m15)
+- Updated quick test commands
+
+### Fixed
+- Fixed incorrect repository links (`anthropics/rust-skills` → `ZhangHanDong/rust-skills`)
+- Fixed actionbook link (`anthropics/actionbook` → `actionbook/actionbook`)
+
+### Documentation
+- Added `docs/context-optimization.md` with optimization details
+- Updated `docs/rust-skills-introduction.md`
+
+---
+
 ## [1.0.0] - 2024-01-16
 
 ### Added
@@ -23,7 +70,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **m05-type-driven**: Type-driven design
 - **m06-error-handling**: Error handling patterns
 - **m07-concurrency**: Concurrency and async
-- **m08-safety**: Safety abstractions
+- ~~**m08-safety**~~: Merged into **unsafe-checker**
 - **m09-domain**: Domain modeling
 - **m10-performance**: Performance optimization
 - **m11-ecosystem**: Ecosystem integration
@@ -90,7 +137,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- Domain skills expansion (fintech, cloud-native, ML)
 - More code templates
 - Index generation tools
-- Additional test coverage
+- Additional dynamic skill support

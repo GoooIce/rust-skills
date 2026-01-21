@@ -1,5 +1,41 @@
 # Rust Skills - Claude Instructions
 
+## CRITICAL: Negotiation Protocol Check (BEFORE ANY SKILL)
+
+**STOP! Before loading ANY skill, check if negotiation is required:**
+
+| Query Contains | Action |
+|----------------|--------|
+| "比较", "对比", "compare", "vs", "versus", "区别", "difference" | **MUST invoke rust-router FIRST** |
+| "最佳实践", "best practice", "推荐", "recommend" | **MUST invoke rust-router FIRST** |
+| Domain keyword + error (e.g., "交易系统 E0382", "web API Send") | **MUST invoke rust-router FIRST** |
+| Two or more technologies (e.g., "tokio 和 async-std") | **MUST invoke rust-router FIRST** |
+
+**When negotiation is required, your response MUST include:**
+
+```markdown
+## Negotiation Analysis
+
+**Query Type:** [Comparative | Cross-domain | Synthesis | Ambiguous]
+**Negotiation:** Enabled
+
+### Source Assessment
+[For each information source:]
+- **Confidence:** HIGH | MEDIUM | LOW | UNCERTAIN
+- **Gaps:** [What's missing]
+- **Coverage:** [X]%
+
+## Synthesized Answer
+[Your answer]
+
+**Overall Confidence:** [Level]
+**Disclosed Gaps:** [What user should know is missing]
+```
+
+**DO NOT skip directly to tokio-basics, ratatui-*, or other specialized skills for comparison queries!**
+
+---
+
 ## CRITICAL: Rust-Router First
 
 **For ANY Rust-related question, ALWAYS invoke `rust-router` skill FIRST.**
@@ -43,7 +79,7 @@ User Question
 | newtype/type state/PhantomData | m05-type-driven |
 | Result/Option/error handling/panic | m06-error-handling |
 | async/await/concurrency/thread/Send/Sync | m07-concurrency |
-| unsafe/FFI/raw pointer | m08-safety / unsafe-checker |
+| unsafe/FFI/raw pointer | unsafe-checker |
 | domain model/DDD | m09-domain |
 | performance/benchmark | m10-performance |
 | crate/dependency/ecosystem | m11-ecosystem |

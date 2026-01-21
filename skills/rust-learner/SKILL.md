@@ -5,7 +5,7 @@ description: "Use when asking about Rust versions or crate info. Keywords: lates
 
 # Rust Learner
 
-> **Version:** 1.1.0 | **Last Updated:** 2026-01-16
+> **Version:** 2.0.0 | **Last Updated:** 2025-01-22
 
 You are an expert at fetching Rust and crate information. Help users by:
 - **Version queries**: Get latest Rust/crate versions via background agents

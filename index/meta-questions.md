@@ -13,7 +13,7 @@ m[XX][YYY][ZZZZZ]
 
 ---
 
-## Core Language Meta-Questions (01-08)
+## Core Language Meta-Questions (01-07)
 
 | Code | Meta-Question | Core Thinking | Key Concepts |
 |------|---------------|---------------|--------------|
@@ -24,7 +24,8 @@ m[XX][YYY][ZZZZZ]
 | **05** | Type-Driven Design | "How do types encode constraints?" | type state, phantom data |
 | **06** | Error Handling Philosophy | "Are failures expected or exceptional?" | Result, panic, recovery |
 | **07** | Concurrency Correctness | "How to ensure concurrency safety at compile time?" | Send, Sync, thread safety |
-| **08** | Safety Boundaries | "Where are safety boundaries, how to build bridges?" | unsafe, FFI, invariants |
+
+> **Note:** m08 (Safety Boundaries) has been merged into **unsafe-checker** skill.
 
 ## Domain Architecture Meta-Questions (09-13)
 
@@ -60,7 +61,7 @@ m[XX][YYY][ZZZZZ]
 - "Generics vs trait objects?" → m04
 - "Error handling strategy?" → m06
 - "Thread safety?" → m07
-- "FFI design?" → m08
+- "FFI design?" → unsafe-checker
 
 **Learning**
 - "How to think about X?" → m14
@@ -69,6 +70,29 @@ m[XX][YYY][ZZZZZ]
 ### By Domain
 
 - Web Development → m06, m07, m11
-- Systems Programming → m01, m07, m08
-- Embedded → m01, m08, m10
+- Systems Programming → m01, m07, unsafe-checker
+- Embedded → m01, unsafe-checker, m10
 - Data Processing → m04, m10, m11
+
+---
+
+## Related Documents
+
+| Document | Purpose |
+|----------|---------|
+| [skills-index.md](./skills-index.md) | Complete skill catalog with descriptions |
+| [triggers-index.md](./triggers-index.md) | Keyword-to-skill mapping |
+| [domain-extensions.md](./domain-extensions.md) | Domain-specific code ranges (F*, M*, CN*, IoT*) |
+
+### Framework
+
+| File | Purpose |
+|------|---------|
+| [../_meta/reasoning-framework.md](../_meta/reasoning-framework.md) | Cognitive layer tracing methodology |
+| [../_meta/layer-definitions.md](../_meta/layer-definitions.md) | Detailed layer boundaries |
+
+### Router
+
+| File | Purpose |
+|------|---------|
+| [../skills/rust-router/SKILL.md](../skills/rust-router/SKILL.md) | Uses meta-questions for routing decisions |

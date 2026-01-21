@@ -56,7 +56,7 @@ Unsafe code review and FFI guidance:
 | m05-type-driven | Type state, phantom types, newtype |
 | m06-error-handling | Result, Option, error propagation |
 | m07-concurrency | Send, Sync, async/await, channels |
-| m08-safety | Memory safety, unsafe boundaries |
+| ~~m08-safety~~ | Merged into unsafe-checker |
 | m09-domain | Domain modeling in Rust |
 | m10-performance | Optimization and benchmarking |
 | m11-ecosystem | Crate integration, interop |
