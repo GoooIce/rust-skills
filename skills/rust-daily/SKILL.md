@@ -4,6 +4,7 @@ description: |
   CRITICAL: Use for Rust news and daily/weekly/monthly reports. Triggers on:
   rust news, rust daily, rust weekly, TWIR, rust blog,
   Rust 日报, Rust 周报, Rust 新闻, Rust 动态
+argument-hint: "[today|week|month]"
 context: fork
 agent: Explore
 ---

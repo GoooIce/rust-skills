@@ -1,6 +1,7 @@
 ---
 name: domain-fintech
 description: "Use when building fintech apps. Keywords: fintech, trading, decimal, currency, financial, money, transaction, ledger, payment, exchange rate, precision, rounding, accounting, 金融, 交易系统, 货币, 支付"
+user-invocable: false
 ---
 
 # FinTech Domain

@@ -5,6 +5,53 @@ All notable changes to rust-skills will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.8] - 2025-01-22
+
+### Added
+- **5 new LSP-based skills** for code intelligence:
+  - `rust-code-navigator` - Navigate code using LSP (goToDefinition, findReferences, hover)
+  - `rust-call-graph` - Visualize function call hierarchies (incomingCalls, outgoingCalls)
+  - `rust-symbol-analyzer` - Analyze project structure (documentSymbol, workspaceSymbol)
+  - `rust-trait-explorer` - Explore trait implementations (goToImplementation)
+  - `rust-refactor-helper` - Safe refactoring with impact analysis
+
+### Technical
+- All LSP skills use `allowed-tools: ["LSP", "Read", "Glob"]` for safety
+- Added comprehensive workflow documentation for each LSP operation
+
+---
+
+## [2.0.7] - 2025-01-22
+
+### Added
+- **New skill:** `rust-deps-visualizer` - Generate ASCII art dependency graphs
+  - Support `--depth` and `--features` options
+  - Size visualization and category grouping
+
+### Changed
+- **22 reference skills** now marked with `user-invocable: false`
+  - m01-m07 (Layer 1: Language Mechanics)
+  - m09-m15 (Layer 2: Design Choices)
+  - domain-* (Layer 3: Domain Constraints)
+  - coding-guidelines
+- **5 command skills** now have `argument-hint` for better UX
+  - `meta-cognition-parallel`: `<rust_question>`
+  - `rust-skill-creator`: `<crate_name|std::module>`
+  - `rust-daily`: `[today|week|month]`
+  - `core-fix-skill-docs`: `[crate_name] [--check-only]`
+  - `core-dynamic-skills`: `[--force] | <crate_name>`
+- **2 skills** now have `allowed-tools` restrictions
+  - `unsafe-checker`: Read, Grep, Glob only (no Bash for safety)
+  - `rust-learner`: Task, Read, Glob only
+- **2 skills** now use dynamic context injection (`!`cmd``)
+  - `domain-embedded`: Auto-injects `.cargo/config.toml`
+  - `m11-ecosystem`: Auto-injects Cargo.toml dependencies
+
+### Documentation
+- Skills now follow Claude Code Plugin Marketplace best practices
+
+---
+
 ## [2.0.6] - 2025-01-22
 
 ### Fixed
