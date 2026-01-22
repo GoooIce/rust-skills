@@ -1,20 +1,18 @@
 {
-  "name": "rust-skills-marketplace",
-  "description": "Rust development skills marketplace for Claude Code",
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "rust-skills",
+  "version": "2.0.8",
+  "description": "Comprehensive Rust development assistant with meta-question routing, coding guidelines, version queries, and ecosystem support",
   "owner": {
-    "name": "CoRust",
+    "name": "ZhangHanDong",
     "email": "corust@example.com"
   },
   "plugins": [
     {
       "name": "rust-skills",
-      "description": "Comprehensive Rust development assistant with meta-question routing, coding guidelines, version queries, and ecosystem support",
-      "version": "1.0.0",
+      "description": "38 skills covering ownership, concurrency, error handling, unsafe code, LSP code intelligence, and domain-specific patterns for Rust development",
       "source": "./",
-      "author": {
-        "name": "CoRust",
-        "email": "corust@example.com"
-      }
+      "category": "development"
     }
   ]
 }

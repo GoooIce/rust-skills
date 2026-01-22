@@ -4,6 +4,7 @@
 
 > AI-powered Rust development assistant with meta-cognition framework
 
+[![Version](https://img.shields.io/badge/version-2.0.9-green.svg)](https://github.com/ZhangHanDong/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blue)](https://github.com/anthropics/claude-code)
 
@@ -45,33 +46,33 @@ AI (with Rust Skills):
 
 ## Installation
 
-### Method 1: Full Plugin (Recommended)
+### Method 1: Marketplace (Recommended)
 
-This method enables **all features including hooks** for automatic meta-cognition triggering.
+Install from Claude Code Plugin Marketplace in two steps:
 
-**Option A: Global Installation (Recommended)**
+```bash
+# Step 1: Add the marketplace
+/plugin marketplace add ZhangHanDong/rust-skills
 
-Add to your `~/.claude/settings.json`:
-
-```json
-{
-  "extraKnownMarketplaces": {
-    "rust-skills": {
-      "source": {
-        "source": "directory",
-        "path": "/path/to/rust-skills"
-      }
-    }
-  },
-  "enabledPlugins": {
-    "rust-skills@rust-skills": true
-  }
-}
+# Step 2: Install the plugin
+/plugin install rust-skills@rust-skills
 ```
 
-Then just run `claude` - no flags needed.
+> **Note**: Step 1 only adds the marketplace (plugin source). Step 2 actually installs the rust-skills plugin with all features enabled.
 
-**Option B: Per-Session**
+### Method 2: NPX
+
+Install using npx:
+
+```bash
+npx skills add ZhangHanDong/rust-skills
+```
+
+> ⚠️ **Note**: NPX installs skills only. Rust-skills is a **plugin architecture** that relies on agents, commands, and hooks for full functionality. For the complete experience, use Method 1 (Marketplace) or Method 3 (Full Plugin).
+
+### Method 3: Full Plugin
+
+This method enables **all features including hooks** for automatic meta-cognition triggering.
 
 ```bash
 # Clone the repository
@@ -81,46 +82,27 @@ git clone https://github.com/ZhangHanDong/rust-skills.git
 claude --plugin-dir /path/to/rust-skills
 ```
 
-### Method 2: Skills Only
+### Method 4: Skills Only
 
 This method only installs skills without hooks. You need to manually invoke skills.
 
-**Option A: Using npx (Recommended)**
-
 ```bash
-npx skills add ZhangHanDong/rust-skills
-```
-
-> ⚠️ **Important**: npx only copies skills. For background agents (rust-learner, rust-daily), also copy agents manually - see Option B.
-
-**Option B: Manual Installation**
-
-```bash
-# Clone repository
+# Clone and copy skills
 git clone https://github.com/ZhangHanDong/rust-skills.git
-
-# Copy skills
 cp -r rust-skills/skills/* ~/.claude/skills/
-
-# Copy agents (REQUIRED for rust-learner, rust-daily, /docs, /crate-info commands)
-mkdir -p ~/.claude/agents
-cp -r rust-skills/agents/* ~/.claude/agents/
 ```
 
 > ⚠️ **Note**: Without hooks, meta-cognition won't trigger automatically. You must manually call `/rust-router` or specific skills.
 
-**Why copy agents?**
-
-Skills like `rust-learner` and `rust-daily` reference agent files via relative paths (`../../agents/*.md`). Without copying agents to `~/.claude/agents/`, these skills will fail with "file not found" errors.
-
 ### Feature Comparison
 
-| Feature | Full Plugin | Skills Only |
-|---------|-------------|-------------|
-| All Skills | ✅ | ✅ |
-| Auto meta-cognition trigger | ✅ | ❌ |
-| Hook-based routing | ✅ | ❌ |
-| Background agents | ✅ | ✅ (requires agent copy) |
+| Feature | Marketplace | NPX | Full Plugin | Skills Only |
+|---------|-------------|-----|-------------|-------------|
+| All 31 Skills | ✅ | ✅ | ✅ | ✅ |
+| Auto meta-cognition trigger | ✅ | ✅ | ✅ | ❌ |
+| Hook-based routing | ✅ | ✅ | ✅ | ❌ |
+| Background agents | ✅ | ✅ | ✅ | ✅ |
+| Easy updates | ✅ | ✅ | ❌ | ❌ |
 
 ### Permission Configuration
 
@@ -152,6 +134,15 @@ See [.claude/settings.example.json](.claude/settings.example.json) for reference
 
 - **OpenCode**: See [.opencode/INSTALL.md](.opencode/INSTALL.md)
 - **Codex**: See [.codex/INSTALL.md](.codex/INSTALL.md)
+
+## Dependent Skills
+
+Rust Skills relies on these external tools for full functionality:
+
+| Tool | Description | GitHub |
+|------|-------------|--------|
+| **actionbook** | MCP server for website action manuals. Used by agents to fetch structured web content (Rust releases, crate info, documentation). | [actionbook/actionbook](https://github.com/actionbook/actionbook) |
+| **agent-browser** | Browser automation tool for fetching real-time web data. Fallback when actionbook is unavailable. | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) |
 
 ## Meta-Cognition Framework
 
@@ -296,6 +287,11 @@ Domain-correct architectural solution
 ## Contributing
 
 Contributions are welcome! Please read our contributing guidelines before submitting PRs.
+
+## Acknowledgments
+
+- [@pinghe](https://github.com/pinghe) - `context: fork` support suggestion ([#4](https://github.com/ZhangHanDong/rust-skills/issues/4))
+- [@DoiiarX](https://github.com/DoiiarX) - OpenCode installation fix ([#6](https://github.com/ZhangHanDong/rust-skills/issues/6))
 
 ## License
 

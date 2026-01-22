@@ -76,7 +76,7 @@ Special domain codes for industry-specific applications.
 - rumqttc, defmt
 
 ### Related Meta-Questions
-- m01, m07, m08, m10
+- m01, m07, unsafe-checker, m10
 
 ### Related Tech Categories
 - 700-759: Embedded Development Layer

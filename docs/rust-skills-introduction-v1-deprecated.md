@@ -172,7 +172,7 @@ unsafe { slice.get_unchecked(index) }
 
 ### 4.2 解决方案：预计算的行动手册
 
-[Actionbook](https://github.com/anthropics/actionbook) 是一个预计算的网站行动手册数据库，包含：
+[Actionbook](https://github.com/actionbook/actionbook) 是一个预计算的网站行动手册数据库，包含：
 
 - 页面描述和功能说明
 - DOM 结构分析
@@ -220,7 +220,7 @@ Actionbook 目前支持 Rust 生态的关键网站：
 
 ```bash
 # 克隆仓库
-git clone https://github.com/anthropics/rust-skills.git
+git clone https://github.com/ZhangHanDong/rust-skills.git
 
 # 使用插件启动 Claude Code
 claude --plugin-dir /path/to/rust-skills
@@ -327,7 +327,7 @@ Rust Skills 是一个开源项目，旨在让 AI 更好地理解和编写 Rust �
 - **完善文档**：改进使用说明和示例
 - **分享经验**：在社区分享你的使用体验
 
-**仓库地址**：[https://github.com/anthropics/rust-skills](https://github.com/anthropics/rust-skills)
+**仓库地址**：[https://github.com/ZhangHanDong/rust-skills](https://github.com/ZhangHanDong/rust-skills)
 
 让我们一起，让 AI 写 Rust 更加精准！
 

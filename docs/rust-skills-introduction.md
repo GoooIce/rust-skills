@@ -172,7 +172,7 @@ unsafe { slice.get_unchecked(index) }
 
 ### Actionbook 的破局思路
 
-[Actionbook](https://github.com/anthropics/actionbook) 采用了一种更聪明的方式：**预计算**。
+[Actionbook](https://github.com/actionbook/actionbook) 采用了一种更聪明的方式：**预计算**。
 
 它预先分析目标网站，生成结构化的"行动手册"，包含：
 - 页面功能描述
@@ -224,7 +224,7 @@ agent-browser 定点提取版本号
 
 ```bash
 # 克隆仓库
-git clone https://github.com/anthropics/rust-skills.git
+git clone https://github.com/ZhangHanDong/rust-skills.git
 
 # 以插件模式启动 Claude Code
 claude --plugin-dir /path/to/rust-skills
@@ -326,7 +326,7 @@ Rust Skills 是一个开源项目，致力于从根本上改善 AI 编写 Rust �
 - **文档完善**：改进说明、补充示例
 - **经验分享**：在社区传播你的使用心得
 
-**项目地址**：[https://github.com/anthropics/rust-skills](https://github.com/anthropics/rust-skills)
+**项目地址**：[https://github.com/ZhangHanDong/rust-skills](https://github.com/ZhangHanDong/rust-skills)
 
 ---
 

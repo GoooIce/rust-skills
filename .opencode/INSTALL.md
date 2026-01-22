@@ -1,71 +1,136 @@
 # Rust Skills for OpenCode
 
+> OpenCode integration for rust-skills
+
 ## Installation
 
-### Option 1: Copy Plugin Directory
+### Method 1: Instructions Configuration (Recommended)
+
+Add rust-skills as instructions in your OpenCode config:
+
+**Step 1:** Clone the repository
+
+```bash
+git clone https://github.com/ZhangHanDong/rust-skills.git ~/rust-skills
+```
+
+**Step 2:** Add to your OpenCode configuration
+
+Edit `~/.config/opencode/opencode.json` (or `.opencode/opencode.json` in your project):
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "~/rust-skills/.opencode/instructions/rust-skills.md"
+  ]
+}
+```
+
+### Method 2: Copy Instructions to Global Config
 
 ```bash
 # Clone rust-skills
 git clone https://github.com/ZhangHanDong/rust-skills.git
 
-# Copy to your OpenCode plugins directory
-cp -r rust-skills/.opencode/plugin ~/.opencode/plugins/rust-skills
+# Create OpenCode instructions directory
+mkdir -p ~/.config/opencode/instructions
+
+# Copy instruction files
+cp rust-skills/.opencode/instructions/*.md ~/.config/opencode/instructions/
 ```
 
-### Option 2: Symlink
-
-```bash
-git clone https://github.com/ZhangHanDong/rust-skills.git ~/rust-skills
-ln -s ~/rust-skills/.opencode/plugin ~/.opencode/plugins/rust-skills
-```
-
-## What's Included
-
-This plugin provides Rust development assistance:
-
-- **rust-router**: Master router for all Rust questions
-- **rust-learner**: Rust version and crate information
-- **coding-guidelines**: Code style and best practices
-- **unsafe-checker**: Unsafe code review and FFI guidance
-- **m01-m15**: Meta-question skills for ownership, concurrency, error handling, etc.
-
-## Usage
-
-After installation, ask OpenCode about:
-
-- Rust ownership and borrowing
-- Error handling patterns
-- Async/await and concurrency
-- Code style and naming conventions
-- Unsafe code review
-
-## Configuration
-
-Add to your OpenCode configuration:
+Then add to your config:
 
 ```json
 {
-  "plugins": {
-    "rust-skills": {
-      "enabled": true
-    }
-  }
+  "instructions": [
+    "~/.config/opencode/instructions/rust-skills.md"
+  ]
 }
 ```
 
-## Default Project Settings
+### Method 3: Project-Level Instructions
 
-When creating Rust projects, use:
+For per-project usage, create `.opencode/opencode.json` in your Rust project:
 
-```toml
-[package]
-edition = "2024"
-rust-version = "1.85"
-
-[lints.rust]
-unsafe_code = "warn"
-
-[lints.clippy]
-all = "warn"
-pedantic = "warn"
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "~/rust-skills/.opencode/instructions/rust-skills.md"
+  ]
+}
 ```
+
+## Verification
+
+After installation, test by asking OpenCode:
+
+```
+How do I fix E0382 in Rust?
+```
+
+Expected: OpenCode should reference ownership concepts and provide Rust-specific guidance.
+
+## What's Included
+
+The rust-skills instructions provide:
+
+- **Rust Coding Guidelines**: Naming conventions, formatting rules, best practices
+- **Error Code Reference**: E0382, E0597, E0277, etc. with explanations
+- **Meta-Question Skills**: Ownership, concurrency, error handling patterns
+- **Default Project Settings**: Recommended Cargo.toml configurations
+
+## Configuration Reference
+
+| Config Location | Scope |
+|-----------------|-------|
+| `~/.config/opencode/opencode.json` | Global (all projects) |
+| `.opencode/opencode.json` | Project-specific |
+
+## Troubleshooting
+
+### Instructions not loading?
+
+1. Verify the path exists:
+   ```bash
+   ls ~/rust-skills/.opencode/instructions/
+   ```
+
+2. Check config syntax:
+   ```bash
+   cat ~/.config/opencode/opencode.json | jq .
+   ```
+
+3. Restart OpenCode after config changes
+
+### Path expansion issues?
+
+Use absolute paths instead of `~`:
+```json
+{
+  "instructions": [
+    "/Users/yourname/rust-skills/.opencode/instructions/rust-skills.md"
+  ]
+}
+```
+
+## Limitations
+
+OpenCode integration provides instruction-based guidance only. Features requiring Claude Code's specific capabilities are not available:
+
+| Feature | OpenCode | Claude Code |
+|---------|----------|-------------|
+| Basic Rust guidance | ✅ | ✅ |
+| Error code explanations | ✅ | ✅ |
+| Coding guidelines | ✅ | ✅ |
+| Auto-triggering hooks | ❌ | ✅ |
+| Background agents | ❌ | ✅ |
+| Dynamic skill loading | ❌ | ✅ |
+
+## Links
+
+- [OpenCode Documentation](https://opencode.ai/docs/)
+- [OpenCode Config Reference](https://opencode.ai/docs/config/)
+- [Rust Skills GitHub](https://github.com/ZhangHanDong/rust-skills)

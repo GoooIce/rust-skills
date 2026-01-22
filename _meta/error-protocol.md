@@ -291,3 +291,124 @@ When escalation happens, use 5-Question Reboot:
 4. **Load appropriate skill** for new layer
 5. **Re-trace downward** with new understanding
 6. **Reset counter** after successful escalation
+
+---
+
+## Negotiation 3-Strike Rule
+
+The 3-Strike Rule extends to agent negotiation responses.
+
+### Confidence-Based Strikes
+
+| Agent Response | Strike Action |
+|----------------|---------------|
+| HIGH confidence, covers intent | No strike - accept |
+| MEDIUM confidence, covers intent | No strike - accept with gaps |
+| MEDIUM confidence, partial intent | Strike 1 - refine query |
+| LOW confidence | Strike 1 - refine query |
+| UNCERTAIN | Strike 1 - try alternative |
+
+### Negotiation Strike Tracking
+
+```markdown
+## Negotiation Log: [Query]
+
+### Round 1 (Strike 1)
+- Agent: crate-researcher
+- Confidence: LOW
+- Gaps: [list]
+- Action: Refine with context
+
+### Round 2 (Strike 2)
+- Agent: crate-researcher (refined)
+- Confidence: MEDIUM
+- Gaps: [fewer]
+- Action: Still need comparison data, try docs-researcher
+
+### Round 3 (Strike 3)
+- Agent: docs-researcher
+- Confidence: MEDIUM
+- Action: Synthesize best-effort answer
+```
+
+### Negotiation Escalation Protocol
+
+```
+Strike 1: Initial query returns LOW/UNCERTAIN confidence
+  ┌─────────────────────────────────────┐
+  │ - Review agent's context questions  │
+  │ - Provide additional context        │
+  │ - Narrow scope if ambiguous         │
+  │ - Re-query same agent               │
+  └─────────────────────────────────────┘
+
+Strike 2: Refined query still LOW, or gaps block intent
+  ┌─────────────────────────────────────┐
+  │ - Try alternative agent             │
+  │ - Try different source              │
+  │ - Combine with other data           │
+  └─────────────────────────────────────┘
+
+Strike 3: Still insufficient
+  ┌─────────────────────────────────────┐
+  │ - Synthesize best-effort answer     │
+  │ - Explicitly list remaining gaps    │
+  │ - Disclose confidence level to user │
+  │ - Suggest manual verification       │
+  └─────────────────────────────────────┘
+```
+
+### Negotiation vs Error 3-Strike Comparison
+
+| Aspect | Error 3-Strike | Negotiation 3-Strike |
+|--------|----------------|----------------------|
+| Trigger | Repeated failure | Low confidence |
+| Target | Layer escalation | Query refinement |
+| Reset | After successful fix | After sufficient answer |
+| Final action | Redesign question | Best-effort synthesis |
+
+### Integration Points
+
+**With Meta-Cognition:**
+- Negotiation happens within layers, not across
+- Layer escalation still follows standard 3-Strike
+- Negotiation is for data gathering, not design
+
+**With Router:**
+- Router decides if negotiation is needed
+- Router evaluates negotiation responses
+- Router manages refinement loop
+
+### Example: Negotiation 3-Strike Sequence
+
+```markdown
+## Query: "Best practices for async error handling in web APIs"
+
+### Strike 1
+- Agent: docs-researcher (tokio error handling)
+- Confidence: MEDIUM
+- Finding: General tokio error patterns
+- Gap: No web-specific patterns
+- Action: Need web context
+
+### Strike 2
+- Agent: docs-researcher (axum error handling)
+- Confidence: MEDIUM
+- Finding: Axum error response patterns
+- Gap: No integration with tokio patterns
+- Action: Try to synthesize
+
+### Strike 3
+- Synthesize from both rounds
+- Answer: Combined tokio + axum patterns
+- Disclosed gaps:
+  - No official "best practice" document exists
+  - Patterns compiled from multiple sources
+- Confidence: MEDIUM (synthesized)
+```
+
+### Related Documents
+
+- `negotiation-protocol.md` - Full negotiation specification
+- `negotiation-templates.md` - Response templates
+- `reasoning-framework.md` - Layer tracing

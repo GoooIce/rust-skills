@@ -4,6 +4,7 @@
 
 > メタ認知フレームワークを備えた AI Rust 開発アシスタント
 
+[![Version](https://img.shields.io/badge/version-2.0.9-green.svg)](https://github.com/ZhangHanDong/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blue)](https://github.com/anthropics/claude-code)
 
@@ -45,33 +46,33 @@ AI (Rust Skills 使用):
 
 ## インストール
 
-### 方法1：完全プラグイン（推奨）
+### 方法1：Marketplace（推奨）
 
-この方法は **hooks を含むすべての機能**を有効にし、メタ認知を自動的にトリガーします。
+Claude Code プラグインマーケットプレイスから2ステップでインストール：
 
-**オプション A：グローバルインストール（推奨）**
+```bash
+# ステップ 1: marketplace を追加
+/plugin marketplace add ZhangHanDong/rust-skills
 
-`~/.claude/settings.json` に追加：
-
-```json
-{
-  "extraKnownMarketplaces": {
-    "rust-skills": {
-      "source": {
-        "source": "directory",
-        "path": "/path/to/rust-skills"
-      }
-    }
-  },
-  "enabledPlugins": {
-    "rust-skills@rust-skills": true
-  }
-}
+# ステップ 2: プラグインをインストール
+/plugin install rust-skills@rust-skills
 ```
 
-その後、フラグなしで `claude` を実行するだけです。
+> **注意**：ステップ 1 は marketplace（プラグインソース）を追加するだけです。ステップ 2 で実際に rust-skills プラグインをインストールし、すべての機能を有効にします。
 
-**オプション B：セッションごと**
+### 方法2：NPX
+
+npx を使用してインストール：
+
+```bash
+npx skills add ZhangHanDong/rust-skills
+```
+
+> ⚠️ **注意**：NPX は skills のみをインストールします。Rust-skills は **プラグインアーキテクチャ** を採用しており、完全な機能には agents、commands、hooks が必要です。完全な体験のためには、方法1（Marketplace）または方法3（完全プラグイン）をお勧めします。
+
+### 方法3：完全プラグイン
+
+この方法は **hooks を含むすべての機能**を有効にし、メタ認知を自動的にトリガーします。
 
 ```bash
 # リポジトリをクローン
@@ -81,46 +82,27 @@ git clone https://github.com/ZhangHanDong/rust-skills.git
 claude --plugin-dir /path/to/rust-skills
 ```
 
-### 方法2：Skills のみ
+### 方法4：Skills のみ
 
 この方法は skills のみをインストールし、hooks は含まれません。skills を手動で呼び出す必要があります。
 
-**オプション A：npx を使用（推奨）**
-
 ```bash
-npx add-skill ZhangHanDong/rust-skills
-```
-
-> ⚠️ **重要**：npx は skills のみをコピーします。バックグラウンドエージェント（rust-learner、rust-daily）を使用する場合は、agents も手動でコピーする必要があります - オプション B を参照。
-
-**オプション B：手動インストール**
-
-```bash
-# リポジトリをクローン
+# クローンして skills をコピー
 git clone https://github.com/ZhangHanDong/rust-skills.git
-
-# skills をコピー
 cp -r rust-skills/skills/* ~/.claude/skills/
-
-# agents をコピー（rust-learner、rust-daily、/docs、/crate-info コマンドに必須）
-mkdir -p ~/.claude/agents
-cp -r rust-skills/agents/* ~/.claude/agents/
 ```
 
 > ⚠️ **注意**：hooks がない場合、メタ認知は自動的にトリガーされません。`/rust-router` または特定の skills を手動で呼び出す必要があります。
 
-**なぜ agents のコピーが必要？**
-
-`rust-learner` や `rust-daily` などの skills は、相対パス（`../../agents/*.md`）でエージェントファイルを参照しています。agents を `~/.claude/agents/` にコピーしないと、これらの skills は "file not found" エラーになります。
-
 ### 機能比較
 
-| 機能 | 完全プラグイン | Skills のみ |
-|------|----------------|-------------|
-| すべての Skills | ✅ | ✅ |
-| 自動メタ認知トリガー | ✅ | ❌ |
-| Hook ルーティング | ✅ | ❌ |
-| バックグラウンドエージェント | ✅ | ✅（agents コピー必須） |
+| 機能 | Marketplace | NPX | 完全プラグイン | Skills のみ |
+|------|-------------|-----|----------------|-------------|
+| 全 31 Skills | ✅ | ✅ | ✅ | ✅ |
+| 自動メタ認知トリガー | ✅ | ✅ | ✅ | ❌ |
+| Hook ルーティング | ✅ | ✅ | ✅ | ❌ |
+| バックグラウンドエージェント | ✅ | ✅ | ✅ | ✅ |
+| 簡単な更新 | ✅ | ✅ | ❌ | ❌ |
 
 ### 権限設定
 
@@ -152,6 +134,15 @@ EOF
 
 - **OpenCode**: [.opencode/INSTALL.md](.opencode/INSTALL.md) を参照
 - **Codex**: [.codex/INSTALL.md](.codex/INSTALL.md) を参照
+
+## 依存 Skills
+
+Rust Skills は完全な機能のために以下の外部ツールに依存しています：
+
+| ツール | 説明 | GitHub |
+|--------|------|--------|
+| **actionbook** | ウェブサイトアクションマニュアル用 MCP サーバー。エージェントが構造化されたウェブコンテンツ（Rust リリース、crate 情報、ドキュメント）を取得するために使用。 | [actionbook/actionbook](https://github.com/actionbook/actionbook) |
+| **agent-browser** | リアルタイムウェブデータ取得のためのブラウザ自動化ツール。actionbook が利用できない場合のフォールバック。 | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) |
 
 ## メタ認知フレームワーク
 
@@ -296,6 +287,11 @@ cd my-rust-project
 ## 貢献
 
 貢献を歓迎します！PR を提出する前に貢献ガイドラインをお読みください。
+
+## 謝辞
+
+- [@pinghe](https://github.com/pinghe) - `context: fork` サポートの提案 ([#4](https://github.com/ZhangHanDong/rust-skills/issues/4))
+- [@DoiiarX](https://github.com/DoiiarX) - OpenCode インストール修正 ([#6](https://github.com/ZhangHanDong/rust-skills/issues/6))
 
 ## ライセンス
 
