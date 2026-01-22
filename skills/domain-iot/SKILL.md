@@ -1,6 +1,7 @@
 ---
 name: domain-iot
 description: "Use when building IoT apps. Keywords: IoT, Internet of Things, sensor, MQTT, device, edge computing, telemetry, actuator, smart home, gateway, protocol, 物联网, 传感器, 边缘计算, 智能家居"
+user-invocable: false
 ---
 
 # IoT Domain

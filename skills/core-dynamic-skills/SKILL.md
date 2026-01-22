@@ -2,6 +2,7 @@
 name: core-dynamic-skills
 # Command-based tool - no description to prevent auto-triggering
 # Triggered by: /sync-crate-skills, /clean-crate-skills, /update-crate-skill
+argument-hint: "[--force] | <crate_name>"
 context: fork
 agent: general-purpose
 ---

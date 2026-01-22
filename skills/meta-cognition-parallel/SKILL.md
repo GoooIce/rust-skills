@@ -1,6 +1,7 @@
 ---
 name: meta-cognition-parallel
 description: "EXPERIMENTAL: Three-layer parallel meta-cognition analysis. Triggers on: /meta-parallel, 三层分析, parallel analysis, 并行元认知"
+argument-hint: "<rust_question>"
 ---
 
 # Meta-Cognition Parallel Analysis (Experimental)

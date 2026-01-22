@@ -1,6 +1,7 @@
 ---
 name: m07-concurrency
 description: "CRITICAL: Use for concurrency/async. Triggers: E0277 Send Sync, cannot be sent between threads, thread, spawn, channel, mpsc, Mutex, RwLock, Atomic, async, await, Future, tokio, deadlock, race condition, 并发, 线程, 异步, 死锁"
+user-invocable: false
 ---
 
 # Concurrency

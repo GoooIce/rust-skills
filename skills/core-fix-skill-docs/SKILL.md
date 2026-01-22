@@ -2,6 +2,7 @@
 name: core-fix-skill-docs
 # Internal maintenance tool - no description to prevent auto-triggering
 # Triggered by: /fix-skill-docs command
+argument-hint: "[crate_name] [--check-only]"
 context: fork
 agent: general-purpose
 ---
