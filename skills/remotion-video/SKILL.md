@@ -145,12 +145,13 @@ import { Sequence } from "remotion";
 
 ## AI 语音解说集成
 
-为视频添加 AI 语音解说，实现音视频同步。支持两种方案：
+为视频添加 AI 语音解说，实现音视频同步。支持三种方案：
 
 | 方案 | 优点 | 缺点 | 硬件要求 | 推荐度 |
 |------|------|------|----------|--------|
 | **MiniMax TTS** | 云端克隆、速度极快（<3秒）、音质优秀 | 按字符计费 | 无 | ⭐⭐⭐ 首选 |
 | **Edge TTS** | 零配置、免费 | 固定音色、无法自定义 | 无 | ⭐⭐ |
+| **vLLM-Omni Qwen3-TTS** | 本地部署、支持克隆音色、完全免费 | 需要 GPU、部署复杂 | GPU 8GB+ | ⭐⭐⭐ 自托管首选 |
 
 ### 方案选择流程
 
@@ -162,6 +163,9 @@ import { Sequence } from "remotion";
 
 2. MiniMax 不可用时
    → 退回 Edge TTS（使用预设音色 zh-CN-YunyangNeural）
+
+3. 需要本地部署/完全免费
+   → 使用 vLLM-Omni Qwen3-TTS（需要 GPU）
 ```
 
 ---
@@ -287,6 +291,108 @@ const sceneStarts = audioConfig.reduce((acc, _, i) => {
   </Sequence>
 ))}
 ```
+
+---
+
+## 方案三：vLLM-Omni Qwen3-TTS（本地部署）
+
+本地部署方案，使用 vLLM-Omni 部署 Qwen3-TTS 模型，完全免费，支持自定义音色。
+
+### 硬件要求
+
+| 组件 | 最低配置 | 推荐配置 |
+|------|----------|----------|
+| GPU | 8GB VRAM | 16GB+ VRAM |
+| 内存 | 16GB | 32GB |
+| 存储 | 20GB | 50GB SSD |
+
+### 部署步骤
+
+#### 1. 安装 vLLM-Omni
+
+```bash
+# 克隆 vLLM-Ommi 仓库
+git clone https://github.com/thudm/vllm-omni
+cd vllm-omni
+
+# 安装依赖
+pip install -r requirements.txt
+```
+
+#### 2. 启动服务器
+
+```bash
+# 启动 vLLM-Omni 服务器（使用 Qwen3-TTS 模型）
+python -m vllm.entrypoints.openai.api_server \
+    --model Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice \
+    --port 8000
+```
+
+#### 3. 测试服务器
+
+```bash
+curl http://localhost:8000/v1/models
+```
+
+### 配置
+
+设置环境变量：
+
+```bash
+# 服务器地址（默认）
+export VLLM_BASE_URL="http://localhost:8000/v1"
+
+# 模型名称（默认）
+export VLLM_MODEL_NAME="Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice"
+
+# 预设语音（可选）
+export VLLM_VOICE="Vivian"
+```
+
+### 可用语音
+
+Qwen3-TTS 支持多种预设语音：
+
+| 语音 ID | 名称 | 风格 |
+|---------|------|------|
+| Vivian | 薇薇安 | 温柔女声 |
+| Adam | 亚当 | 成熟男声 |
+| echo | 艾科 | 活泼女声 |
+| ... | ... | ... |
+
+完整语音列表请参考 [Qwen3-TTS 文档](https://github.com/Qwen/Qwen3-TTS)。
+
+### 生成脚本
+
+使用 `generate_audio_qwen.py` 生成音频：
+
+```bash
+# 安装依赖
+pip install openai>=1.0.0
+
+# 运行脚本
+python generate_audio_qwen.py
+```
+
+脚本特性：
+- **断点续作**：已存在的音频文件自动跳过
+- **实时进度**：显示生成进度
+- **自动更新配置**：生成完成后自动更新 audioConfig.ts
+- **格式转换**：自动处理 WAV → MP3 转换
+
+### ⚠️ vLLM-Ommi 踩坑经验
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| 连接拒绝 | 服务器未启动 | 确认 vLLM-Omni 服务正在运行 |
+| CUDA OOM | GPU 显存不足 | 降低 batch_size 或使用更小的模型 |
+| 音频格式错误 | 返回 WAV 而非 MP3 | 脚本会自动用 ffmpeg 转换 |
+
+### 性能参考
+
+| 模型 | 生成速度 | 音质 |
+|------|----------|------|
+| Qwen3-TTS-12Hz-0.6B-CustomVoice | ~5-10s/句 | 优秀 |
 
 ---
 
